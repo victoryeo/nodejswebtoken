@@ -23,13 +23,6 @@ class User {
 let userArray = []
 let articleArray = []
 
-let user = {
-   user_id: "",
-   login: "",
-   password: "",
-   token: "",
-}
-
 function isEmptyObject(obj) {
   return !Object.keys(obj).length;
 }
@@ -67,7 +60,7 @@ function checkUser(_user) {
         return 1
       }
       else
-      // password not match
+        // password not match
         return 2
     }
   }
