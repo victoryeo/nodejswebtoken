@@ -87,11 +87,11 @@ function saveArticle(_token) {
 
 function checkVisibility(_token) {
   for (const [k,v] of userArray.entries()) {
-    console.log(k,v)
+    //console.log(k,v)
     {
       if (v.token == _token) {
         for (const [k2,v2] of userArray.entries()) {
-          console.log(k2,v2)
+          //console.log(k2,v2)
           if (v.user_id == v2.user_id)
             return 1
         }
@@ -232,10 +232,11 @@ app.get('/api/articles', (req, res) => {
     //res.json({"article_id" : "art1", "title": "tit1", "content": "c1", "visibility":"public", "user_id" :"42"});
     res.json([])
   } else {
-    if (checkToken(token) == 0) {
+    let retV = checkToken(token)
+    if (retV == 0) {
       res.status(200);
       res.json([])
-    } else if (checkToken(token) == 1) {
+    } else if (retV == 1) {
       if (checkVisibility(token) == 1) {
         res.status(200);
         res.send('private article');
@@ -243,9 +244,10 @@ app.get('/api/articles', (req, res) => {
         res.status(200);
         res.send('public article');
       }
+    } else {
+      res.status(200);
+      res.send('article');
     }
-    res.status(200);
-    res.send('article');
   }
 })
 
